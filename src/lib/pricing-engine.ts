@@ -3,6 +3,7 @@ import { CONVERSATION_TIERS, EXTRAS_CONFIG, COUPONS } from "@/config/pricing-con
 export interface CalculatorState {
     conversations: number;
     instagramComments: boolean;
+    abandonedCart: boolean;
     prospectorContacts: number;
     bulkMessages: {
         enabled: boolean;
@@ -56,6 +57,15 @@ export function calculatePricing(state: CalculatorState): CalculationResult {
             label: EXTRAS_CONFIG.INSTAGRAM_COMMENTS.label,
             qty: 1,
             subtotal: EXTRAS_CONFIG.INSTAGRAM_COMMENTS.price,
+        });
+    }
+
+    if (state.abandonedCart) {
+        extrasBreakdown.push({
+            key: "abandoned_cart",
+            label: EXTRAS_CONFIG.ABANDONED_CART.label,
+            qty: 1,
+            subtotal: EXTRAS_CONFIG.ABANDONED_CART.price,
         });
     }
 

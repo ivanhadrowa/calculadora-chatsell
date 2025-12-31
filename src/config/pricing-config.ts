@@ -41,6 +41,10 @@ export const EXTRAS_CONFIG = {
     extraPrice: 5,
     label: "Seguimientos IA por chat",
   },
+  ABANDONED_CART: {
+    price: 180,
+    label: "Carrito Abandonado por WhatsApp",
+  },
 };
 
 export const COUPONS = {
