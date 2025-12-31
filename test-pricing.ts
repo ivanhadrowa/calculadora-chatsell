@@ -3,6 +3,7 @@ import { calculatePricing, CalculatorState } from "./src/lib/pricing-engine";
 const testState: CalculatorState = {
     conversations: 3000,
     instagramComments: true,
+    abandonedCart: false,
     prospectorContacts: 2000,
     bulkMessages: { enabled: true, count: 500 }, // Should be forced to 1000
     agentsTotal: 5, // 2 extra
