@@ -4,11 +4,11 @@ export interface PricingTier {
 }
 
 export const CONVERSATION_TIERS: PricingTier[] = [
-  { min: 10000, rate: 0.09 },
-  { min: 6000, rate: 0.12 },
-  { min: 3000, rate: 0.166 },
-  { min: 1000, rate: 0.35 },
-  { min: 0, rate: 0.35 }, // Default for < 1000
+  { min: 10000, rate: 0.12 },
+  { min: 6000, rate: 0.16 },
+  { min: 3000, rate: 0.20 },
+  { min: 1000, rate: 0.40 },
+  { min: 0, rate: 0.40 }, // Default for < 1000
 ];
 
 export const EXTRAS_CONFIG = {
