@@ -355,24 +355,26 @@ export default function Calculator() {
               </div>
 
               {/* Abandoned Cart */}
-              <div className={`p-5 rounded-2xl border transition-all ${state.abandonedCart ? 'border-primary bg-primary/5' : 'border-white/5 bg-white/5'}`}>
-                <div className="flex justify-between items-start mb-4">
-                  <div className="p-2 bg-yellow-500/10 rounded-lg text-yellow-500">
-                    <ShoppingCart size={20} />
+              {EXTRAS_CONFIG.ABANDONED_CART.show && (
+                <div className={`p-5 rounded-2xl border transition-all ${state.abandonedCart ? 'border-primary bg-primary/5' : 'border-white/5 bg-white/5'}`}>
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="p-2 bg-yellow-500/10 rounded-lg text-yellow-500">
+                      <ShoppingCart size={20} />
+                    </div>
+                    <label className="switch">
+                      <input
+                        type="checkbox"
+                        checked={state.abandonedCart}
+                        onChange={(e) => updateState('abandonedCart', e.target.checked)}
+                      />
+                      <span className="slider"></span>
+                    </label>
                   </div>
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      checked={state.abandonedCart}
-                      onChange={(e) => updateState('abandonedCart', e.target.checked)}
-                    />
-                    <span className="slider"></span>
-                  </label>
+                  <h3 className="font-bold mb-1">{EXTRAS_CONFIG.ABANDONED_CART.label}</h3>
+                  <p className="text-sm text-gray-400">Recupera ventas perdidas automáticamente</p>
+                  <div className="mt-4 font-bold text-primary">USD {EXTRAS_CONFIG.ABANDONED_CART.price} / mes</div>
                 </div>
-                <h3 className="font-bold mb-1">{EXTRAS_CONFIG.ABANDONED_CART.label}</h3>
-                <p className="text-sm text-gray-400">Recupera ventas perdidas automáticamente</p>
-                <div className="mt-4 font-bold text-primary">USD {EXTRAS_CONFIG.ABANDONED_CART.price} / mes</div>
-              </div>
+              )}
 
             </div>
 
