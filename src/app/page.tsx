@@ -66,6 +66,8 @@ export default function Calculator() {
       return;
     }
 
+    console.log('Generating PDF for client:', clientName);
+
     setIsExporting(true);
     try {
       // Small delay to ensure any layout shifts are settled
@@ -95,9 +97,12 @@ export default function Calculator() {
 
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
 
-      const safeClientName = clientName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+      const safeClientName = clientName.trim().replace(/[^a-z0-9]/gi, '_').toLowerCase();
       const dateFilename = new Date().toISOString().split('T')[0];
-      pdf.save(`presupuesto_chatsell_${safeClientName}_${dateFilename}.pdf`);
+      const finalFilename = `presupuesto_chatsell_${safeClientName}_${dateFilename}.pdf`;
+
+      console.log('Saving PDF with filename:', finalFilename);
+      pdf.save(finalFilename);
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('Hubo un error al generar el PDF. Por favor intenta de nuevo.');
