@@ -35,6 +35,7 @@ export default function Calculator() {
 
   const [appliedCoupon, setAppliedCoupon] = useState('');
   const [isExporting, setIsExporting] = useState(false);
+  const [clientName, setClientName] = useState('');
   const printableRef = useRef<HTMLDivElement>(null);
 
   const [mounted, setMounted] = useState(false);
@@ -59,6 +60,11 @@ export default function Calculator() {
 
   const handleExport = async () => {
     if (!printableRef.current) return;
+
+    if (!clientName.trim()) {
+      alert('Por favor ingresa el nombre del cliente antes de generar el presupuesto.');
+      return;
+    }
 
     setIsExporting(true);
     try {
@@ -88,7 +94,10 @@ export default function Calculator() {
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Presupuesto_Chatsell_${new Date().toISOString().split('T')[0]}.pdf`);
+
+      const safeClientName = clientName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+      const dateFilename = new Date().toISOString().split('T')[0];
+      pdf.save(`presupuesto_chatsell_${safeClientName}_${dateFilename}.pdf`);
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('Hubo un error al generar el PDF. Por favor intenta de nuevo.');
@@ -120,7 +129,9 @@ export default function Calculator() {
               <p className="text-[#9ca3af] text-xs">Automatización Inteligente para tu Negocio</p>
             </div>
             <div className="text-right">
-              <h2 className="text-[#ffffff] text-xl font-bold tracking-tight">PRESUPUESTO</h2>
+              <h2 className="text-[#ffffff] text-xl font-bold tracking-tight">
+                PRESUPUESTO {clientName ? `- ${clientName.toUpperCase()}` : ''}
+              </h2>
               <p className="text-[#6b7280] text-xs mt-1 lowercase">chatsell.net</p>
             </div>
           </div>
@@ -515,6 +526,18 @@ export default function Calculator() {
                 <div className="text-5xl font-black gradient-text">
                   {formatCurrency(result.total)}
                 </div>
+              </div>
+
+              {/* Client Name Input */}
+              <div>
+                <label className="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wide">Nombre del Cliente</label>
+                <input
+                  type="text"
+                  placeholder="Empresa o Cliente"
+                  value={clientName}
+                  onChange={(e) => setClientName(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-primary/50 transition-all font-bold"
+                />
               </div>
 
               <button
