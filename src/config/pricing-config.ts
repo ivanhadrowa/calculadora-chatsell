@@ -60,9 +60,7 @@ export const COUPONS = {
   RODOLFO24: {
     discount: 0.30,
     isValid: () => {
-      // Valid only today (2025-12-31)
-      const now = new Date();
-      return now.getFullYear() === 2025 && now.getMonth() === 11 && now.getDate() === 31;
+      return true;
     },
     message: "30% de descuento (Solo hoy!)",
   }
