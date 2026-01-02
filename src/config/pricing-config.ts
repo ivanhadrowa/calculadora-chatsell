@@ -52,11 +52,9 @@ export const COUPONS = {
   RODOLFO: {
     discount: 0.20,
     isValid: () => {
-      const now = new Date();
-      const day = now.getDay();
-      return day >= 1 && day <= 5; // Monday to Friday (1-5)
+      return true;
     },
-    message: "20% de descuento (Lunes a Viernes)",
+    message: "20% de descuento Abonando en la semana",
   },
   RODOLFO24: {
     discount: 0.30,
@@ -64,5 +62,12 @@ export const COUPONS = {
       return true;
     },
     message: "30% de descuento (Solo hoy!)",
+  },
+  RODOLFO10: {
+    discount: 0.10,
+    isValid: () => {
+      return true;
+    },
+    message: "10% de descuento Abonando en la semana",
   }
 };
