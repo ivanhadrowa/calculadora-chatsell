@@ -54,14 +54,14 @@ export const COUPONS = {
     isValid: () => {
       return true;
     },
-    message: "20% de descuento Abonando en la semana",
+    message: "20% de descuento (SOLO HOY!)",
   },
   RODOLFO24: {
     discount: 0.30,
     isValid: () => {
       return true;
     },
-    message: "30% de descuento (Solo hoy!)",
+    message: "30% de descuento (SOLO HOY!)",
   },
   RODOLFO10: {
     discount: 0.10,
