@@ -13,8 +13,10 @@ import {
   CreditCard,
   Percent,
   ChevronRight,
-  ShoppingCart
+  ShoppingCart,
+  FileText
 } from 'lucide-react';
+import Link from 'next/link';
 import { calculatePricing, CalculatorState, CalculationResult } from '@/lib/pricing-engine';
 import { EXTRAS_CONFIG, COUPONS } from '@/config/pricing-config';
 import jsPDF from 'jspdf';
@@ -47,7 +49,7 @@ export default function Calculator() {
     setMounted(true);
     setDateStr(new Date().toLocaleDateString());
     setTimeStr(new Date().toLocaleTimeString());
-    setTrackingId(`CS-${Math.random().toString(36).substr(2, 6).toUpperCase()}`);
+    setTrackingId(`CS-${Math.random().toString(36).substring(2, 8).toUpperCase()}`);
   }, []);
 
   const result: CalculationResult = useMemo(() => {
@@ -71,13 +73,13 @@ export default function Calculator() {
     setIsExporting(true);
     try {
       // Small delay to ensure any layout shifts are settled
-      await new Promise(r => setTimeout(r, 100));
+      await new Promise(r => setTimeout(r, 300));
 
       const canvas = await html2canvas(printableRef.current, {
         scale: 2, // Higher quality
-        useCORS: true,
         backgroundColor: '#ffffff',
         logging: false,
+        imageTimeout: 0,
         onclone: (clonedDoc) => {
           const hiddenDiv = clonedDoc.querySelector('.pdf-hidden') as HTMLElement;
           if (hiddenDiv) {
@@ -233,9 +235,16 @@ export default function Calculator() {
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
           Calculadora de Costos <span className="gradient-text">Chatsell</span>
         </h1>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-6">
           Diseña el plan perfecto para tu negocio. Ajusta las conversaciones y features para obtener un presupuesto a medida.
         </p>
+        <Link
+          href="/presupuesto"
+          className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-6 py-3 rounded-xl font-bold transition-all"
+        >
+          <FileText size={20} />
+          Crear Presupuesto Personalizado
+        </Link>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
