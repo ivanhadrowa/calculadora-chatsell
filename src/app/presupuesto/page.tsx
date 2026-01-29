@@ -80,8 +80,8 @@ export default function PresupuestoCreator() {
     setIsExporting(true);
     try {
       // Hide logo temporarily
-      const logoImg = printableRef.current.querySelector('img[alt="Chatsell"]') as HTMLImageElement;
-      if (logoImg) logoImg.style.visibility = 'hidden';
+      // Hide logo temporarily -> REMOVED
+
 
       await new Promise(r => setTimeout(r, 300));
 
@@ -92,7 +92,8 @@ export default function PresupuestoCreator() {
       });
 
       // Show logo again
-      if (logoImg) logoImg.style.visibility = 'visible';
+      // Show logo again -> REMOVED
+
 
       const pdf = new jsPDF('p', 'mm', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -194,11 +195,8 @@ export default function PresupuestoCreator() {
           <div className="mt-auto border-t border-[#e5e7eb] pt-8">
             <h4 className="text-xs font-bold uppercase tracking-widest mb-4 text-[#111827]">Términos y Condiciones</h4>
             <ul className="text-[10px] text-[#4b5563] space-y-2 leading-relaxed">
-              <li>1. Este presupuesto tiene una validez de 48 horas a partir de su emisión ({validUntilStr}).</li>
+              <li>1. Este presupuesto tiene una validez de 2 días a partir de su envío</li>
               <li>2. Los precios están expresados en Dólares Estadounidenses (USD).</li>
-              <li>3. El servicio se factura de forma mensual y prepaga.</li>
-              <li>4. Chatsell garantiza un uptime del 99.9% en sus servicios de automatización.</li>
-              <li>5. Las integraciones adicionales se ajustan proporcionalmente si se solicitan a mitad del ciclo.</li>
             </ul>
             <p className="text-center text-[9px] text-[#9ca3af] mt-12 italic">
               Este es un presupuesto informativo generado automáticamente por el sistema de Chatsell.
