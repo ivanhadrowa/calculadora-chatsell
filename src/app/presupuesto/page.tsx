@@ -184,7 +184,7 @@ export default function PresupuestoCreator() {
                 <span className="font-bold">{formatCurrency(calculateTotal())}</span>
               </div>
               <div className="pt-4 border-t-2 border-[#111827] flex justify-between items-end">
-                <span className="text-xs font-black uppercase tracking-tighter">Total Mensual</span>
+                <span className="text-xs font-black uppercase tracking-tighter">Total</span>
                 <span className="text-2xl font-black text-[#2563eb] leading-none">
                   {formatCurrency(calculateTotal())}
                 </span>
